@@ -1,0 +1,157 @@
+/* Wizard de registro de obras (usa las variables de index.css) */
+
+.wizard textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 10px;
+  background-color: white;
+  color: var(--color-text);
+  resize: vertical;
+}
+
+.wizard textarea:focus {
+  outline: 3px solid rgb(255 100 85 / 35%);
+  border-color: var(--color-primary);
+}
+
+.wizard input[type="file"] {
+  padding: 0.6rem;
+  background-color: var(--color-peach);
+  border-style: dashed;
+}
+
+/* Barra de progreso: 4 círculos unidos por una línea */
+.wizard-progreso {
+  display: flex;
+  justify-content: space-between;
+  margin: var(--spacing-lg) 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wizard-paso {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  text-align: center;
+  font-size: var(--font-size-small);
+  color: var(--color-muted);
+}
+
+.wizard-paso:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  left: calc(50% + 1.4rem);
+  width: calc(100% - 2.8rem);
+  height: 3px;
+  background-color: var(--color-border);
+}
+
+.wizard-paso.hecho:not(:last-child)::after {
+  background-color: var(--color-primary);
+}
+
+.wizard-circulo {
+  width: 2.2rem;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: var(--color-peach);
+  border: 2px solid var(--color-border);
+  font-weight: 700;
+  color: var(--color-muted);
+}
+
+.wizard-paso.hecho .wizard-circulo,
+.wizard-paso.activo .wizard-circulo {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-ink);
+}
+
+.wizard-paso.activo {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+/* Textos de apoyo */
+.wizard-ayuda {
+  margin: 0.25rem 0 0;
+  font-size: var(--font-size-small);
+  color: var(--color-primary-dark);
+}
+
+.wizard-archivo {
+  margin: 0.25rem 0 0;
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* Vista previa */
+.wizard-imagen {
+  display: block;
+  max-width: 100%;
+  max-height: 16rem;
+  margin: 0 auto var(--spacing-md);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+}
+
+/* Botones Atrás / Siguiente */
+.wizard-acciones {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.wizard-acciones .primary-button {
+  flex: 1;
+}
+
+.wizard-acciones .secondary-button {
+  background-color: var(--color-peach);
+}
+
+.wizard button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: none;
+  box-shadow: none;
+}
+
+/* Confirmación */
+.wizard-confirmacion {
+  text-align: center;
+}
+
+.wizard-folio {
+  margin: var(--spacing-md) 0 var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--color-peach);
+  border-radius: 12px;
+  font-size: clamp(1.25rem, 6vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 599px) {
+  .wizard-nombre {
+    font-size: 0.7rem;
+  }
+
+  .wizard-acciones {
+    flex-direction: column-reverse;
+  }
+
+  .wizard-acciones .secondary-button {
+    width: 100%;
+  }
+}
