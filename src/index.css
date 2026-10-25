@@ -109,3 +109,20 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* Enlace que se ve como botón (Dashboard) */
+a.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Enlace "Registrar obra" en el encabezado */
+.header-link {
+  color: var(--color-ink);
+  font-size: var(--font-size-small);
+  font-weight: 700;
+  white-space: nowrap;
+}
