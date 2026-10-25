@@ -1,4 +1,3 @@
-
 import {
   BrowserRouter,
   Routes,
@@ -9,6 +8,7 @@ import {
 import Layout from "./components/Layout";
 import Registro from "./pages/Registro";
 import Dashboard from "./pages/Dashboard";
+import RegistrarObra from "./pages/RegistrarObra";
 import RutaProtegida from "./components/RutaProtegida";
 
 import "./App.css";
@@ -34,11 +34,15 @@ function App() {
             }
           />
 
+<Route path="registrar-obra" element={<RegistrarObra />} />
+
           <Route path="*" element={<Navigate to="/registro" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+
+
 
 export default App;

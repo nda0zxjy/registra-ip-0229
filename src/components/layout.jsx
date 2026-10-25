@@ -1,7 +1,10 @@
-
-import { Outlet } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 
 function Layout() {
+  // useLocation hace que el Layout se actualice al cambiar de página
+  useLocation();
+  const haySesion = Boolean(localStorage.getItem("registraIpUsuario"));
+
   return (
     <div className="app-layout">
       <header className="app-header">
@@ -10,6 +13,11 @@ function Layout() {
           <span className="header-label">
             Registro de creadores
           </span>
+          {haySesion && (
+            <Link to="/registrar-obra" className="header-link">
+              Registrar obra
+            </Link>
+          )}
         </div>
       </header>
 

@@ -1,5 +1,4 @@
-
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -31,12 +30,16 @@ function Dashboard() {
         </p>
       </div>
 
+      <Link to="/registrar-obra" className="primary-button">
+        Registrar una obra
+      </Link>
+
       <button
         type="button"
         className="secondary-button"
         onClick={cerrarSesion}
       >
-        Cerrar sesión
+        Cerrar sesión :3
       </button>
     </section>
   );
