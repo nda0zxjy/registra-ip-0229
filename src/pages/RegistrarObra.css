@@ -155,3 +155,35 @@
     width: 100%;
   }
 }
+
+.wizard-confirmacion {
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.wizard-confirmacion .secondary-button {
+  background-color: var(--color-peach);
+}
+
+a.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.wizard-confirmacion {
+  display: grid;
+  gap: var(--spacing-sm);
+}
+
+.wizard-confirmacion .secondary-button {
+  background-color: var(--color-peach);
+}
+
+a.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}

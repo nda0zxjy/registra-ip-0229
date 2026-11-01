@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { generarCertificado } from "../utils/generarCertificado";
 import "./RegistrarObra.css";
 
 const API_URL = "http://localhost:4000";
-const FOLIO_PREFIX = "0229"; 
+const FOLIO_PREFIX = "0229";
 const CATEGORIAS = ["Literatura", "Música", "Fotografía", "Arte visual", "Software", "Otro"];
 const PASOS = ["Archivo", "Metadatos", "Vista previa", "Confirmación"];
 const DATOS_INICIALES = { archivo: null, titulo: "", categoria: "", descripcion: "" };
@@ -135,6 +137,7 @@ function PasoVistaPrevia({ datos, autor }) {
     setUrlImagen(url);
     return () => URL.revokeObjectURL(url);
   }, [datos.archivo]);
+
   return (
     <>
       {urlImagen && <img className="wizard-imagen" src={urlImagen} alt="Vista previa de la obra" />}
@@ -163,10 +166,13 @@ export default function RegistrarObra() {
   const usuarioGuardado = localStorage.getItem("registraIpUsuario");
   const usuario = usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
   const autor = usuario?.nombre || usuario?.correo || "Anónimo";
+
   const [paso, setPaso] = useState(1);
   const [datos, setDatos] = useState(DATOS_INICIALES); // un solo estado para todo el wizard
   const [folio, setFolio] = useState("");
+  const [obraRegistrada, setObraRegistrada] = useState(null);
   const [enviando, setEnviando] = useState(false);
+  const [generandoPdf, setGenerandoPdf] = useState(false);
   const [error, setError] = useState("");
 
   const actualizar = (campo, valor) => setDatos((previo) => ({ ...previo, [campo]: valor }));
@@ -187,11 +193,13 @@ export default function RegistrarObra() {
     formData.append("categoria", datos.categoria);
     formData.append("descripcion", datos.descripcion.trim());
     formData.append("autor", autor);
+    formData.append("correo", usuario?.correo || "");
 
     try {
       const respuesta = await fetch(`${API_URL}/obras`, { method: "POST", body: formData });
       const json = await respuesta.json();
       if (!respuesta.ok) throw new Error(json.error || "No se pudo registrar la obra.");
+      setObraRegistrada(json.obra);
       setFolio(json.obra.folio);
       setPaso(4);
     } catch (e) {
@@ -208,8 +216,21 @@ export default function RegistrarObra() {
   const reiniciar = () => {
     setDatos(DATOS_INICIALES);
     setFolio("");
+    setObraRegistrada(null);
     setError("");
     setPaso(1);
+  };
+
+  const descargarCertificado = async () => {
+    setGenerandoPdf(true);
+    setError("");
+    try {
+      await generarCertificado(obraRegistrada);
+    } catch {
+      setError("No se pudo generar el certificado.");
+    } finally {
+      setGenerandoPdf(false);
+    }
   };
 
   return (
@@ -224,7 +245,21 @@ export default function RegistrarObra() {
         <div className="wizard-confirmacion">
           <p className="form-description">Tu obra quedó registrada. Guarda este folio:</p>
           <p className="wizard-folio">{folio}</p>
-          <button type="button" className="primary-button" onClick={reiniciar}>
+
+          <button
+            type="button"
+            className="primary-button"
+            onClick={descargarCertificado}
+            disabled={generandoPdf}
+          >
+            {generandoPdf ? "Generando..." : "Descargar certificado"}
+          </button>
+
+          <Link to={`/obras/${folio}`} className="secondary-button">
+            Ver detalle de la obra
+          </Link>
+
+          <button type="button" className="secondary-button" onClick={reiniciar}>
             Registrar otra obra
           </button>
         </div>
