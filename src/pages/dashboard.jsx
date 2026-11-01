@@ -34,6 +34,10 @@ function Dashboard() {
         Registrar una obra
       </Link>
 
+      <Link to="/obras" className="primary-button">
+        Mis obras
+      </Link>
+      
       <button
         type="button"
         className="secondary-button"

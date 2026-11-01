@@ -10,6 +10,8 @@ import Registro from "./pages/Registro";
 import Dashboard from "./pages/Dashboard";
 import RegistrarObra from "./pages/RegistrarObra";
 import RutaProtegida from "./components/RutaProtegida";
+import Obras from "./pages/Obras";
+import ObraDetalle from "./pages/ObraDetalle";
 
 import "./App.css";
 
@@ -35,7 +37,20 @@ function App() {
           />
 
 <Route path="registrar-obra" element={<RegistrarObra />} />
+          <Route
+            path="registrar-obra"
+            element={
+              <RutaProtegida>
+                <RegistrarObra />
+              </RutaProtegida>
+            }
+          />
 
+          <Route path="obras" element={<RutaProtegida><Obras /></RutaProtegida>} />
+          <Route path="obras/:folio" element={<RutaProtegida><ObraDetalle /></RutaProtegida>} />
+
+          <Route path="*" element={<Navigate to="/registro" replace />} />
+          
           <Route path="*" element={<Navigate to="/registro" replace />} />
         </Route>
       </Routes>

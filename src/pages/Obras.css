@@ -1,0 +1,44 @@
+/* Lista y detalle de obras (usa las variables de index.css) */
+
+.obras-lista {
+  display: grid;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-lg) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.obra-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background-color: var(--color-peach);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.obra-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -14px var(--color-primary);
+}
+
+.obra-titulo {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.obra-meta {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obra-item {
+    transition: none;
+  }
+}
