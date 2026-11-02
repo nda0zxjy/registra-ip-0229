@@ -5,7 +5,7 @@ import "./RegistrarObra.css";
 
 const API_URL = "http://localhost:4000";
 const FOLIO_PREFIX = "0229";
-const CATEGORIAS = ["Literatura", "Música", "Fotografía", "Arte visual", "Software", "Otro"];
+const CATEGORIAS = ["Diseño", "Fotografía", "Escritura", "Cine"];
 const PASOS = ["Archivo", "Metadatos", "Vista previa", "Confirmación"];
 const DATOS_INICIALES = { archivo: null, titulo: "", categoria: "", descripcion: "" };
 
