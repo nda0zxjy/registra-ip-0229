@@ -12,6 +12,7 @@ import RegistrarObra from "./pages/RegistrarObra";
 import RutaProtegida from "./components/RutaProtegida";
 import Obras from "./pages/Obras";
 import ObraDetalle from "./pages/ObraDetalle";
+import Galeria from "./pages/Galeria";
 
 import "./App.css";
 
@@ -48,11 +49,9 @@ function App() {
 
           <Route path="obras" element={<RutaProtegida><Obras /></RutaProtegida>} />
           <Route path="obras/:folio" element={<RutaProtegida><ObraDetalle /></RutaProtegida>} />
-
+          <Route path="galeria" element={<RutaProtegida><Galeria /></RutaProtegida>} />
           <Route path="*" element={<Navigate to="/registro" replace />} />
-          
-          <Route path="*" element={<Navigate to="/registro" replace />} />
-        </Route>
+          </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -37,6 +37,8 @@ function Dashboard() {
       <Link to="/obras" className="primary-button">
         Mis obras
       </Link>
+
+         <Link to="/galeria" className="primary-button">Galería</Link>
       
       <button
         type="button"

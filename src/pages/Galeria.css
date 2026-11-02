@@ -1,0 +1,231 @@
+/* Galería de obras (usa las variables de index.css) */
+
+.galeria {
+  width: 100%;
+}
+
+.galeria h2 {
+  margin: var(--spacing-sm) 0 var(--spacing-lg);
+  text-align: center;
+}
+
+.galeria-volver {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* ISO 9241-411: área táctil mínima */
+}
+
+/* ---------- Controles ---------- */
+.galeria-controles {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.galeria-campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.galeria-campo label {
+  font-weight: 600;
+  font-size: var(--font-size-small);
+}
+
+.galeria-campo input,
+.galeria-campo select {
+  width: 100%;
+  min-height: 44px; /* ISO 9241-411: área táctil mínima */
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 10px;
+  background-color: white;
+  color: var(--color-text);
+}
+
+.galeria-campo input:focus,
+.galeria-campo select:focus {
+  outline: 3px solid rgb(255 100 85 / 35%);
+  border-color: var(--color-primary);
+}
+
+/* ---------- Filtros de categoría ---------- */
+.galeria-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.filtro-btn {
+  min-width: 44px;
+  min-height: 44px; /* ISO 9241-411: área táctil mínima */
+  padding: 0.5rem 1.1rem;
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-primary-dark);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background-color 0.15s;
+}
+
+.filtro-btn:hover {
+  background-color: var(--color-peach);
+}
+
+/* El estado activo no depende solo del color: también cambia el peso y el borde */
+.filtro-btn[aria-pressed="true"] {
+  background-color: var(--color-primary);
+  border-width: 3px;
+  font-weight: 800;
+}
+
+/* ---------- Estados: carga, conteo y vacío ---------- */
+.galeria-estado {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin: var(--spacing-md) 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-small);
+}
+
+.galeria-spinner {
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary-dark);
+  border-radius: 50%;
+  animation: galeria-giro 0.8s linear infinite;
+}
+
+@keyframes galeria-giro {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.galeria-vacio {
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-md);
+  background-color: var(--color-peach);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.galeria-vacio p {
+  margin: 0;
+}
+
+/* ---------- Grid responsivo ---------- */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--spacing-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.galeria-tarjeta {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 44px;
+  overflow: hidden;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  color: var(--color-ink);
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.galeria-tarjeta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -16px var(--color-primary);
+}
+
+.galeria-miniatura {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-peach);
+}
+
+.galeria-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.galeria-icono {
+  font-size: 3.5rem;
+}
+
+.galeria-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+}
+
+.galeria-titulo {
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.galeria-autor {
+  font-size: var(--font-size-small);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* La categoría es texto, no solo color: se lee igual en blanco y negro */
+.galeria-categoria {
+  align-self: flex-start;
+  padding: 0.15rem 0.6rem;
+  background-color: var(--color-peach);
+  border: 1px solid var(--color-primary-dark);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 599px) {
+  .galeria-controles {
+    grid-template-columns: 1fr;
+  }
+
+  .galeria-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+  }
+
+  .galeria-info {
+    padding: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 380px) {
+  .galeria-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .galeria-spinner {
+    animation-duration: 2.4s;
+  }
+
+  .galeria-tarjeta,
+  .filtro-btn {
+    transition: none;
+  }
+}
